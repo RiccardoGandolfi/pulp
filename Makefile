@@ -37,6 +37,8 @@ BENDER_FPGA_SCRIPTS_DIR = fpga/pulp/tcl/generated
 BENDER_MIN_VERSION = 0.26.1
 BENDER = ./bender # Adapt this if using a local bender install
 
+CompileFlags := +acc -permissive -suppress 2583 -suppress 13314 -suppress vlog-1952
+
 .PHONY: checkout
 ifndef IPAPPROX
 Bender.lock: bender
@@ -66,7 +68,8 @@ scripts-bender-vsim: | Bender.lock
 	$(BENDER) script vsim \
 		--vlog-arg="$(VLOG_ARGS)" --vcom-arg="" \
 		-t rtl -t test -t pulp -t idma \
-		| grep -v "set ROOT" >> $(BENDER_SIM_BUILD_DIR)/compile.tcl
+		| grep -v "set ROOT" >> $(BENDER_SIM_BUILD_DIR)/compile.tcl; \
+		echo 'vopt $(CompileFlags) tb_pulp -o vopt_tb' >> $(BENDER_SIM_BUILD_DIR)/compile.tcl
 
 scripts-bender-fpga: | Bender.lock
 	mkdir -p fpga/pulp/tcl/generated
