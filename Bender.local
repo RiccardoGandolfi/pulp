@@ -1,4 +1,11 @@
 overrides:
-  # cv32e40p: { path: "working_dir/cv32e40p" } # Temporary override by Bender using `bender clone` command
+  pulp_cluster: { path: "working_dir/pulp_cluster" } # Temporary override by Bender using `bender clone` command
+  pulp_soc: { path: "working_dir/pulp_soc" } # Temporary override by Bender using `bender clone` command
+  axi: { path: "working_dir/axi" } # Temporary override by Bender using `bender clone` command
+  cv32e40p: { path: "working_dir/cv32e40p" } # Temporary override by Bender using `bender clone` command
+#  # cv32e40p: { path: "working_dir/cv32e40p" } # Temporary override by Bender using `bender clone` command
   # fpu_interco: { path: "working_dir/fpu_interco" } # Temporary override by Bender using `bender clone` command
-  # pulp_cluster: { path: "working_dir/pulp_cluster" }
+#  # pulp_cluster: { path: "working_dir/pulp_cluster" }
+  fpnew: { git: "https://github.com/pulp-platform/cvfpu.git", rev: pulp-v0.1.3}
+  redundancy_cells: { git: "https://github.com/pulp-platform/redundancy_cells.git", rev: 49e714b97a19a7aaddf064ae2757c8f02d1f62dc}
+  apb:                    { git: "https://github.com/pulp-platform/apb.git", version:  0.1.0 }

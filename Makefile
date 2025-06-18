@@ -3,6 +3,8 @@ SHELL=bash
 
 PKG_DIR ?= $(PWD)/pulp-runtime
 
+include bender-common.mk
+
 export VSIM_PATH=$(PWD)/sim
 export PULP_PATH=$(PWD)
 
@@ -67,7 +69,7 @@ scripts-bender-vsim: | Bender.lock
 	echo 'set ROOT [file normalize [file dirname [info script]]/..]' > $(BENDER_SIM_BUILD_DIR)/compile.tcl
 	$(BENDER) script vsim \
 		--vlog-arg="$(VLOG_ARGS)" --vcom-arg="" \
-		-t rtl -t test -t pulp -t idma \
+		-t rtl -t test -t pulp -t idma $(common_defs) -t $(common_targs) \
 		| grep -v "set ROOT" >> $(BENDER_SIM_BUILD_DIR)/compile.tcl \
 
 scripts-bender-fpga: | Bender.lock
